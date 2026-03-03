@@ -56,3 +56,64 @@ You don’t need: • Stock price daily updates
 • Investor earnings details
 • Corporate politics
 Unless you're moving to strategy roles.
+
+
+
+
+
+1️⃣ Setup & Configuration
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git config --list
+Used once when setting up Git.
+2️⃣ Creating / Cloning Repository
+git init
+→ Initializes a new local repo
+git clone 
+→ Copies remote repository to your system
+Example:
+git clone https://github.com/user/project.git⁠�
+3️⃣ Checking Status & Changes
+git status
+→ Shows modified, staged, untracked files
+git diff
+→ Shows changes not staged
+git diff --staged
+→ Shows staged changes
+4️⃣ Staging & Committing
+git add filename
+→ Add specific file
+git add .
+→ Add all files
+git commit -m "message"
+→ Commit with message
+git commit -am "message"
+→ Add + commit (only tracked files)
+5️⃣ Branching (Very Important in Client Projects)
+git branch
+→ List branches
+git branch new-branch
+→ Create branch
+git checkout new-branch
+→ Switch branch
+git checkout -b new-branch
+→ Create + switch
+git switch branch-name
+→ Modern way to switch
+Enterprise Tip: Never commit directly to main/master unless instructed.
+6️⃣ Remote Operations
+git remote -v
+→ Show remote URLs
+git pull
+→ Fetch + merge changes
+git fetch
+→ Download changes (no merge)
+git push origin branch-name
+→ Push branch
+Example: git push origin feature/login-module
+7️⃣ Merging & Rebasing
+git merge branch-name
+→ Merge branch into current branch
+git rebase branch-name
+→ Reapply commits on top of another branch
+Important: Rebase rewrites history. Be careful in shared branches.
