@@ -1,182 +1,58 @@
-Sample Input / Output 1
-Enter the number of recyclable items to be added
-4
-Enter item details
-R401:Notebook:140:Paper
-R402:SodaCan:200:Metal
-R403:PlasticStraw:200:Plastic
-R404:Glass Jar:180:Glass
-Enter the Item Id to check recycling status
-R403
-R403 | PlasticStraw | Plastic | 200 times recycled
-Most recycled items are
-R402 | SodaCan | Metal | 200 times recycled
-R403 | PlasticStraw | Plastic | 200 times recycled
-Sample Input / Output 2
-Enter the number of recyclable items to be added
-2
-Enter item details
-R501:Plastic Cup:75:Plastic
-R502:OldBook:120:Paper
-Enter the Item Id to check recycling status
-R999
-Item Id not found
-Most recycled items are
-R502 | OldBook | Paper | 120 times recycled
-—------------------------------------------------------------------------------------------------------------------------
-Class 1: RecyclableItem.java
-public class RecyclableItem {
-private String itemId;
-private String name;
-private int recycleCount;
-private String category;
-// No-argument constructor
-public RecyclableItem() {
-}
-// Four-argument constructor
-public RecyclableItem(String itemId, String name, int recycleCount, String category) {
-this.itemId = itemId;
-this.name = name;
-this.recycleCount = recycleCount;
-this.category = category;
-}
-// Getters and Setters
-public String getItemId() {
-return itemId;
-}
-public void setItemId(String itemId) {
-this.itemId = itemId;
-}
-public String getName() {
-return name;
-}
-public void setName(String name) {
-this.name = name;
-}
-public int getRecycleCount() {
-return recycleCount;
-}
-public void setRecycleCount(int recycleCount) {
-this.recycleCount = recycleCount;
-}
-public String getCategory() {
-return category;
-}
-public void setCategory(String category) {
-this.category = category;
-}
-}
-✅ Class 2: RecyclingUtil.java
-import java.util.*;
-public class RecyclingUtil {
-private List<RecyclableItem> itemList = new ArrayList<>();
-public List<RecyclableItem> getItemList() {
-return itemList;
-}
-public void setItemList(List<RecyclableItem> itemList) {
-this.itemList = itemList;
-}
-// Requirement 1
-public void addRecyclingRecord(RecyclableItem item) {
-itemList.add(item);
-}
-// Requirement 2
-public RecyclableItem getItemById(String itemId) {
-for (RecyclableItem item : itemList) {
-if (item.getItemId().equals(itemId)) {
-return item;
-}
-}
-return null;
-}
-// Requirement 3
-public Set<RecyclableItem> getMostRecycledItems() {
-Set<RecyclableItem> result = new LinkedHashSet<>();
-int maxRecycleCount = 0;
-for (RecyclableItem item : itemList) {
-if (item.getRecycleCount() > maxRecycleCount) {
-maxRecycleCount = item.getRecycleCount();
-}
-}
-for (RecyclableItem item : itemList) {
-if (item.getRecycleCount() == maxRecycleCount) {
-result.add(item);
-}
-}
-return result;
-}
-}
-✅ Class 3: UserInterface.java
-import java.util.*;
-public class UserInterface {
-public static void main(String[] args) {
-Scanner sc = new Scanner(System.in);
-RecyclingUtil util = new RecyclingUtil();
-System.out.println("Enter the number of recyclable items to be added");
-int size = sc.nextInt();
-sc.nextLine();
-System.out.println("Enter item details");
-for (int i = 0; i < size; i++) {
-String input = sc.nextLine();
-String[] parts = input.split(":");
-String itemId = parts[0];
-String name = parts[1];
-int recycleCount = Integer.parseInt(parts[2]);
-String category = parts[3];
-RecyclableItem item =
-new RecyclableItem(itemId, name, recycleCount, category);
-util.addRecyclingRecord(item);
-}
-System.out.println("Enter the Item Id to check recycling status");
-String searchId = sc.nextLine();
-RecyclableItem foundItem = util.getItemById(searchId);
-if (foundItem != null) {
-System.out.println(foundItem.getItemId() + " | "
-+ foundItem.getName() + " | "
-+ foundItem.getCategory() + " | "
-+ foundItem.getRecycleCount() + " times recycled");
-} else {
-System.out.println("Item Id not found");
-}
-System.out.println("Most recycled items are");
-Set<RecyclableItem> mostRecycled = util.getMostRecycledItems();
-for (RecyclableItem item : mostRecycled) {
-System.out.println(item.getItemId() + " | "
-+ item.getName() + " | "
-+ item.getCategory() + " | "
-+ item.getRecycleCount() + " times recycled");
-}
-sc.close();
-}
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-SQL
-SELECT 
-    c.cust_id,
-    c.cust_name,
-    o.delivery_date
-FROM customers c
-INNER JOIN orders o
-    ON c.cust_id = o.cust_id
-WHERE c.email LIKE '%gmail%';
+It is a major U.S. brokerage and wealth management company.
+Founded: 1971
+Headquarters: Westlake, Texas, USA
+Industry: Financial Services / Brokerage / Wealth Management
+Now, from Mphasis employee perspective, here’s what you MUST know 👇
+1️⃣ What Schwab Actually Does (Business Model)
+Schwab helps individuals and institutions:
+• Buy and sell stocks, ETFs, mutual funds
+• Manage retirement accounts (401k, IRA)
+• Wealth advisory services
+• Banking services (checking, savings, loans)
+In simple words: It’s a platform where Americans invest and manage money.
+Why this matters to you: You must understand that every line of code you write may impact real financial transactions.
+2️⃣ Revenue Model (Important)
+Schwab earns money through:
+• Asset management fees
+• Interest income (client cash)
+• Trading services
+• Advisory fees
+Why this matters: Performance, accuracy, and compliance are critical. Even small bugs can affect money movement.
+3️⃣ Compliance & Security Importance
+Schwab operates in a heavily regulated industry.
+That means: • Data security is extremely strict
+• Audit trails are mandatory
+• Code changes are tightly controlled
+• Production deployments are serious events
+As a developer/support engineer: Never treat it like a casual startup project.
+4️⃣ Technology Environment (High-Level)
+You should know:
+• Enterprise-level architecture
+• Legacy systems + modern cloud mix
+• High availability systems
+• Disaster recovery planning
+• Strict DevOps and ITIL processes
+This explains why processes may feel slow.
+It’s not slow — it’s regulated.
+5️⃣ Organizational Culture (US Financial Firm Style)
+• Documentation heavy
+• Risk-averse
+• Structured communication
+• Professional tone
+• Accountability focused
+When talking to US stakeholders: Be clear, factual, not emotional.
+6️⃣ Recent Major Event You Should Know
+Schwab acquired TD Ameritrade (big brokerage firm).
+That means: • Large-scale system integration
+• Data migration
+• Platform consolidation
+• Massive modernization work
+If you're on Schwab account, this integration likely impacts your systems.
+Knowing this makes you sound informed.
+7️⃣ What You DON’T Need to Know
+You don’t need: • Stock price daily updates
+• CEO speeches
+• Investor earnings details
+• Corporate politics
+Unless you're moving to strategy roles.
