@@ -1,119 +1,246 @@
 
-It is a major U.S. brokerage and wealth management company.
-Founded: 1971
-Headquarters: Westlake, Texas, USA
-Industry: Financial Services / Brokerage / Wealth Management
-Now, from Mphasis employee perspective, here’s what you MUST know 👇
-1️⃣ What Schwab Actually Does (Business Model)
-Schwab helps individuals and institutions:
-• Buy and sell stocks, ETFs, mutual funds
-• Manage retirement accounts (401k, IRA)
-• Wealth advisory services
-• Banking services (checking, savings, loans)
-In simple words: It’s a platform where Americans invest and manage money.
-Why this matters to you: You must understand that every line of code you write may impact real financial transactions.
-2️⃣ Revenue Model (Important)
-Schwab earns money through:
-• Asset management fees
-• Interest income (client cash)
-• Trading services
-• Advisory fees
-Why this matters: Performance, accuracy, and compliance are critical. Even small bugs can affect money movement.
-3️⃣ Compliance & Security Importance
-Schwab operates in a heavily regulated industry.
-That means: • Data security is extremely strict
-• Audit trails are mandatory
-• Code changes are tightly controlled
-• Production deployments are serious events
-As a developer/support engineer: Never treat it like a casual startup project.
-4️⃣ Technology Environment (High-Level)
-You should know:
-• Enterprise-level architecture
-• Legacy systems + modern cloud mix
-• High availability systems
-• Disaster recovery planning
-• Strict DevOps and ITIL processes
-This explains why processes may feel slow.
-It’s not slow — it’s regulated.
-5️⃣ Organizational Culture (US Financial Firm Style)
-• Documentation heavy
-• Risk-averse
-• Structured communication
-• Professional tone
-• Accountability focused
-When talking to US stakeholders: Be clear, factual, not emotional.
-6️⃣ Recent Major Event You Should Know
-Schwab acquired TD Ameritrade (big brokerage firm).
-That means: • Large-scale system integration
-• Data migration
-• Platform consolidation
-• Massive modernization work
-If you're on Schwab account, this integration likely impacts your systems.
-Knowing this makes you sound informed.
-7️⃣ What You DON’T Need to Know
-You don’t need: • Stock price daily updates
-• CEO speeches
-• Investor earnings details
-• Corporate politics
-Unless you're moving to strategy roles.
 
 
+Project Overview (Start your explanation like this)
+This project is called Trade File Processing and Management Service.
+It is a Spring Boot multi-module backend application designed to process daily trade files, store the data in a database, and provide REST APIs to manage those files.
+The system uses Spring Batch to process large files, Spring Security with JWT to secure APIs, and OpenAPI (Swagger) for API documentation.
+2. Overall Flow of the System
+Explain the system in this simple flow.
+Trade File
+↓
+Spring Batch processes the file
+↓
+Data stored in MySQL staging tables
+↓
+Metadata stored (file name, status, records etc.)
+↓
+REST APIs allow users to manage records
+↓
+JWT authentication secures APIs
+↓
+Swagger provides API documentation
+3. Multi-Module Backend Architecture
+This project follows a multi-module Maven architecture.
+Instead of putting everything in one project, the application is divided into separate modules, each responsible for a specific function.
+Modules used in the project:
+Parent Module
+API Module
+Service Module
+DAO Module
+Model Module
+Batch Module
+Security Module
+This separation makes the system clean, scalable, and easy to maintain.
+4. Parent Module
+Explanation you can say:
+The Parent Module is the root project that manages all submodules.
+Responsibilities:
+Manages dependencies
+Defines common configurations
+Builds all modules together
+Example structure
+Copy code
 
+trade-file-processing-parent
+│
+├── api-module
+├── service-module
+├── dao-module
+├── model-module
+├── batch-module
+└── security-module
+The parent pom.xml controls all modules.
+5. API Module (Controller Layer)
+Explanation:
+The API Module exposes REST endpoints which clients or frontend applications use to interact with the system.
+Responsibilities:
+Receive HTTP requests
+Validate input
+Call service layer
+Return response
+Example APIs:
+Search File Records
+Update File Status
+Delete File Record
+Archive File Record
+Example endpoints
+GET /files/search
+PUT /files/{id}/status
+DELETE /files/{id}
+POST /files/{id}/archive
+Structure
+Copy code
 
+api-module
+└── controller
+     └── FileLoadController.java
+6. Service Module (Business Logic Layer)
+Explanation:
+The Service Module contains the business logic of the application.
+It acts as a bridge between the controller layer and database layer.
+Responsibilities:
+Implement business rules
+Process data
+Validate logic
+Call DAO layer
+Example services
+FileLoadService
+SearchService
+ArchiveService
+StatusService
+Flow
+Controller → Service → DAO
+Structure
+Copy code
 
-1️⃣ Setup & Configuration
-git config --global user.name "Your Name"
-git config --global user.email "your@email.com"
-git config --list
-Used once when setting up Git.
-2️⃣ Creating / Cloning Repository
-git init
-→ Initializes a new local repo
-git clone 
-→ Copies remote repository to your system
-Example:
-git clone https://github.com/user/project.git⁠�
-3️⃣ Checking Status & Changes
-git status
-→ Shows modified, staged, untracked files
-git diff
-→ Shows changes not staged
-git diff --staged
-→ Shows staged changes
-4️⃣ Staging & Committing
-git add filename
-→ Add specific file
-git add .
-→ Add all files
-git commit -m "message"
-→ Commit with message
-git commit -am "message"
-→ Add + commit (only tracked files)
-5️⃣ Branching (Very Important in Client Projects)
-git branch
-→ List branches
-git branch new-branch
-→ Create branch
-git checkout new-branch
-→ Switch branch
-git checkout -b new-branch
-→ Create + switch
-git switch branch-name
-→ Modern way to switch
-Enterprise Tip: Never commit directly to main/master unless instructed.
-6️⃣ Remote Operations
-git remote -v
-→ Show remote URLs
-git pull
-→ Fetch + merge changes
-git fetch
-→ Download changes (no merge)
-git push origin branch-name
-→ Push branch
-Example: git push origin feature/login-module
-7️⃣ Merging & Rebasing
-git merge branch-name
-→ Merge branch into current branch
-git rebase branch-name
-→ Reapply commits on top of another branch
-Important: Rebase rewrites history. Be careful in shared branches.
+service-module
+└── service
+     └── FileLoadService.java
+7. DAO Module (Database Layer)
+Explanation:
+The DAO Module handles all database interactions.
+It communicates with the MySQL database using Spring Data JPA or JDBC.
+Responsibilities
+CRUD operations
+Query execution
+Database access
+Example repositories
+FileLoadRepository
+TradeRecordRepository
+ArchiveRepository
+Structure
+Copy code
+
+dao-module
+└── repository
+     └── FileLoadRepository.java
+8. Model Module (Data Structures)
+Explanation:
+The Model Module contains all data models used across the application.
+It includes:
+Entities
+DTOs
+Enums
+Entities represent database tables.
+Example
+FileLoad
+TradeRecord
+DTOs are used to transfer data between layers.
+Example
+FileLoadDTO
+SearchRequestDTO
+Enums store constant values.
+Example
+FileStatus
+LOADED
+PROCESSING
+PROCESSED
+FAILED
+ARCHIVED
+Structure
+Copy code
+
+model-module
+├── entity
+├── dto
+└── enums
+9. Batch Module (File Processing)
+Explanation:
+The Batch Module processes large trade files using Spring Batch.
+Spring Batch is designed for large-scale data processing.
+It processes files using three components.
+Reader
+Reads file line by line
+Processor
+Validates and transforms data
+Writer
+Stores data in the database
+Batch Flow
+File
+↓
+Reader
+↓
+Processor
+↓
+Writer
+↓
+Database
+Structure
+Copy code
+
+batch-module
+├── reader
+├── processor
+├── writer
+└── config
+Example classes
+TradeFileReader
+TradeFileProcessor
+TradeFileWriter
+10. Security Module
+Explanation:
+The Security Module protects all APIs using JWT authentication.
+Flow:
+User Login
+↓
+JWT token generated
+↓
+User sends token with API request
+↓
+Security filter validates token
+↓
+API access granted
+Components
+JwtUtil
+JwtFilter
+SecurityConfig
+AuthenticationController
+Structure
+Copy code
+
+security-module
+├── config
+├── filter
+└── util
+11. Database Design
+The system stores file information and trade data in MySQL.
+Example tables
+file_load
+file_load_id
+filename
+load_time
+status
+records_loaded
+error_count
+trade_records
+trade_id
+file_load_id
+symbol
+quantity
+price
+archive_file_load
+file_load_id
+filename
+status
+archived_time
+12. Key Technologies Used
+Spring Boot
+Spring Batch
+Spring JDBC
+Spring Data JPA
+Spring Security (JWT)
+Maven
+OpenAPI (Swagger)
+MySQL
+Java 21
+13. Code Quality Requirements
+The project enforces high quality standards.
+100% code coverage using JaCoCo
+No SonarQube code smells
+No vulnerabilities
+No bugs
+This ensures the system is reliable and maintainable.
+14. Final Short Explanation (Best for Interview)
+You can conclude like this:
+This project is a Spring Boot multi-module backend system designed to process daily trade files using Spring Batch. The data is stored in MySQL staging tables, and the system exposes secure REST APIs for searching, updating, deleting, and archiving file records. The APIs are secured using JWT authentication, documented using OpenAPI (Swagger), and the code quality is maintained using SonarQube and 100% test coverage.
