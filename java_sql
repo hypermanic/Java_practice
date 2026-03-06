@@ -1,7 +1,30 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+
+  files = [
+    { id: 1, name: 'trade_2026_03_01.csv', date: '01 Mar 2026', status: 'Loaded', records: 1200 },
+    { id: 2, name: 'trade_2026_03_02.csv', date: '02 Mar 2026', status: 'Processing', records: 850 },
+    { id: 3, name: 'trade_2026_03_03.csv', date: '03 Mar 2026', status: 'Failed', records: 0 },
+    { id: 4, name: 'trade_2026_03_04.csv', date: '04 Mar 2026', status: 'Archived', records: 1450 }
+  ];
+
+}
+
+
 
 <div class="dashboard-container">
 
   <div class="sidebar">
+
     <h2>Trade Manager</h2>
 
     <ul>
@@ -69,13 +92,14 @@
             <td>{{file.date}}</td>
 
             <td
-            [ngClass]="{
-            'status-loaded':file.status==='Loaded',
-            'status-processing':file.status==='Processing',
-            'status-failed':file.status==='Failed',
-            'status-archived':file.status==='Archived'
-            }">
-            {{file.status}}
+              [ngClass]="{
+                'status-loaded': file.status === 'Loaded',
+                'status-processing': file.status === 'Processing',
+                'status-failed': file.status === 'Failed',
+                'status-archived': file.status === 'Archived'
+              }"
+            >
+              {{file.status}}
             </td>
 
             <td>{{file.records}}</td>
@@ -94,26 +118,64 @@
 
 
 
+.dashboard-container{
+display:flex;
+height:100vh;
+font-family:Arial, Helvetica, sans-serif;
+}
 
+.sidebar{
+width:220px;
+background:#555879;
+color:white;
+padding:20px;
+}
+
+.sidebar h2{
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+padding:12px 0;
+cursor:pointer;
+}
+
+.sidebar li:hover{
+color:#F4EBD3;
+}
+
+.main-content{
+flex:1;
+padding:20px;
+background:#DED3C4;
+}
+
+.navbar{
 background:#555879;
 color:white;
 padding:15px;
 border-radius:6px;
 margin-bottom:20px;
+font-size:18px;
 }
 
 .cards{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:20px;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
 .card{
 background:#F4EBD3;
 padding:20px;
 border-radius:8px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+box-shadow:0 3px 6px rgba(0,0,0,0.1);
 }
 
 .card h3{
@@ -122,7 +184,7 @@ color:#555879;
 }
 
 .card p{
-font-size:22px;
+font-size:24px;
 margin-top:10px;
 }
 
@@ -140,11 +202,11 @@ border-collapse:collapse;
 th{
 background:#98A1BC;
 color:white;
-padding:10px;
+padding:12px;
 }
 
 td{
-padding:10px;
+padding:12px;
 border-bottom:1px solid #eee;
 }
 
@@ -169,40 +231,15 @@ font-weight:bold;
 }
 
 
-import { Component } from '@angular/core';
 
-@Component({
-selector: 'app-dashboard',
-templateUrl: './dashboard.component.html',
-styleUrls: ['./dashboard.component.css']
-})
-export class DashboardComponent {
-
-files = [
-{id:1,name:'trade_2026_03_01.csv',date:'01 Mar 2026',status:'Loaded',records:1200},
-{id:2,name:'trade_2026_03_02.csv',date:'02 Mar 2026',status:'Processing',records:850},
-{id:3,name:'trade_2026_03_03.csv',date:'03 Mar 2026',status:'Failed',records:0},
-{id:4,name:'trade_2026_03_04.csv',date:'04 Mar 2026',status:'Archived',records:1450}
-];
-
+body{
+margin:0;
+background:#DED3C4;
 }
 
 
-import { Component } from '@angular/core';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
 
-  files = [
-    { id: 1, name: 'trade_2026_03_01.csv', date: '01 Mar 2026', status: 'Loaded', records: 1200 },
-    { id: 2, name: 'trade_2026_03_02.csv', date: '02 Mar 2026', status: 'Processing', records: 850 },
-    { id: 3, name: 'trade_2026_03_03.csv', date: '03 Mar 2026', status: 'Failed', records: 0 },
-    { id: 4, name: 'trade_2026_03_04.csv', date: '04 Mar 2026', status: 'Archived', records: 1450 }
-  ];
-
-}
+<body>
+  <app-root></app-root>
+</body>
