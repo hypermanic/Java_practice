@@ -1,246 +1,116 @@
 
 
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#DED3C4;
+}
 
-Project Overview (Start your explanation like this)
-This project is called Trade File Processing and Management Service.
-It is a Spring Boot multi-module backend application designed to process daily trade files, store the data in a database, and provide REST APIs to manage those files.
-The system uses Spring Batch to process large files, Spring Security with JWT to secure APIs, and OpenAPI (Swagger) for API documentation.
-2. Overall Flow of the System
-Explain the system in this simple flow.
-Trade File
-↓
-Spring Batch processes the file
-↓
-Data stored in MySQL staging tables
-↓
-Metadata stored (file name, status, records etc.)
-↓
-REST APIs allow users to manage records
-↓
-JWT authentication secures APIs
-↓
-Swagger provides API documentation
-3. Multi-Module Backend Architecture
-This project follows a multi-module Maven architecture.
-Instead of putting everything in one project, the application is divided into separate modules, each responsible for a specific function.
-Modules used in the project:
-Parent Module
-API Module
-Service Module
-DAO Module
-Model Module
-Batch Module
-Security Module
-This separation makes the system clean, scalable, and easy to maintain.
-4. Parent Module
-Explanation you can say:
-The Parent Module is the root project that manages all submodules.
-Responsibilities:
-Manages dependencies
-Defines common configurations
-Builds all modules together
-Example structure
-Copy code
+.dashboard-container{
+display:flex;
+height:100vh;
+}
 
-trade-file-processing-parent
-│
-├── api-module
-├── service-module
-├── dao-module
-├── model-module
-├── batch-module
-└── security-module
-The parent pom.xml controls all modules.
-5. API Module (Controller Layer)
-Explanation:
-The API Module exposes REST endpoints which clients or frontend applications use to interact with the system.
-Responsibilities:
-Receive HTTP requests
-Validate input
-Call service layer
-Return response
-Example APIs:
-Search File Records
-Update File Status
-Delete File Record
-Archive File Record
-Example endpoints
-GET /files/search
-PUT /files/{id}/status
-DELETE /files/{id}
-POST /files/{id}/archive
-Structure
-Copy code
+.sidebar{
+width:220px;
+background:#555879;
+color:white;
+padding:20px;
+}
 
-api-module
-└── controller
-     └── FileLoadController.java
-6. Service Module (Business Logic Layer)
-Explanation:
-The Service Module contains the business logic of the application.
-It acts as a bridge between the controller layer and database layer.
-Responsibilities:
-Implement business rules
-Process data
-Validate logic
-Call DAO layer
-Example services
-FileLoadService
-SearchService
-ArchiveService
-StatusService
-Flow
-Controller → Service → DAO
-Structure
-Copy code
+.sidebar h2{
+margin-bottom:30px;
+}
 
-service-module
-└── service
-     └── FileLoadService.java
-7. DAO Module (Database Layer)
-Explanation:
-The DAO Module handles all database interactions.
-It communicates with the MySQL database using Spring Data JPA or JDBC.
-Responsibilities
-CRUD operations
-Query execution
-Database access
-Example repositories
-FileLoadRepository
-TradeRecordRepository
-ArchiveRepository
-Structure
-Copy code
+.sidebar ul{
+list-style:none;
+padding:0;
+}
 
-dao-module
-└── repository
-     └── FileLoadRepository.java
-8. Model Module (Data Structures)
-Explanation:
-The Model Module contains all data models used across the application.
-It includes:
-Entities
-DTOs
-Enums
-Entities represent database tables.
-Example
-FileLoad
-TradeRecord
-DTOs are used to transfer data between layers.
-Example
-FileLoadDTO
-SearchRequestDTO
-Enums store constant values.
-Example
-FileStatus
-LOADED
-PROCESSING
-PROCESSED
-FAILED
-ARCHIVED
-Structure
-Copy code
+.sidebar li{
+padding:10px 0;
+cursor:pointer;
+}
 
-model-module
-├── entity
-├── dto
-└── enums
-9. Batch Module (File Processing)
-Explanation:
-The Batch Module processes large trade files using Spring Batch.
-Spring Batch is designed for large-scale data processing.
-It processes files using three components.
-Reader
-Reads file line by line
-Processor
-Validates and transforms data
-Writer
-Stores data in the database
-Batch Flow
-File
-↓
-Reader
-↓
-Processor
-↓
-Writer
-↓
-Database
-Structure
-Copy code
+.sidebar li:hover{
+color:#F4EBD3;
+}
 
-batch-module
-├── reader
-├── processor
-├── writer
-└── config
-Example classes
-TradeFileReader
-TradeFileProcessor
-TradeFileWriter
-10. Security Module
-Explanation:
-The Security Module protects all APIs using JWT authentication.
-Flow:
-User Login
-↓
-JWT token generated
-↓
-User sends token with API request
-↓
-Security filter validates token
-↓
-API access granted
-Components
-JwtUtil
-JwtFilter
-SecurityConfig
-AuthenticationController
-Structure
-Copy code
+.main-content{
+flex:1;
+padding:20px;
+}
 
-security-module
-├── config
-├── filter
-└── util
-11. Database Design
-The system stores file information and trade data in MySQL.
-Example tables
-file_load
-file_load_id
-filename
-load_time
-status
-records_loaded
-error_count
-trade_records
-trade_id
-file_load_id
-symbol
-quantity
-price
-archive_file_load
-file_load_id
-filename
-status
-archived_time
-12. Key Technologies Used
-Spring Boot
-Spring Batch
-Spring JDBC
-Spring Data JPA
-Spring Security (JWT)
-Maven
-OpenAPI (Swagger)
-MySQL
-Java 21
-13. Code Quality Requirements
-The project enforces high quality standards.
-100% code coverage using JaCoCo
-No SonarQube code smells
-No vulnerabilities
-No bugs
-This ensures the system is reliable and maintainable.
-14. Final Short Explanation (Best for Interview)
-You can conclude like this:
-This project is a Spring Boot multi-module backend system designed to process daily trade files using Spring Batch. The data is stored in MySQL staging tables, and the system exposes secure REST APIs for searching, updating, deleting, and archiving file records. The APIs are secured using JWT authentication, documented using OpenAPI (Swagger), and the code quality is maintained using SonarQube and 100% test coverage.
+.navbar{
+background:#555879;
+color:white;
+padding:15px;
+border-radius:6px;
+margin-bottom:20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:20px;
+}
+
+.card{
+background:#F4EBD3;
+padding:20px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h3{
+margin:0;
+color:#555879;
+}
+
+.card p{
+font-size:22px;
+margin-top:10px;
+}
+
+.table-container{
+background:white;
+padding:20px;
+border-radius:8px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#98A1BC;
+color:white;
+padding:10px;
+}
+
+td{
+padding:10px;
+border-bottom:1px solid #eee;
+}
+
+.status-loaded{
+color:green;
+font-weight:bold;
+}
+
+.status-processing{
+color:orange;
+font-weight:bold;
+}
+
+.status-failed{
+color:red;
+font-weight:bold;
+}
+
+.status-archived{
+color:#555879;
+font-weight:bold;
+}
