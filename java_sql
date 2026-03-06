@@ -114,3 +114,22 @@ font-weight:bold;
 color:#555879;
 font-weight:bold;
 }
+
+
+import { Component } from '@angular/core';
+
+@Component({
+selector: 'app-dashboard',
+templateUrl: './dashboard.component.html',
+styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent {
+
+files = [
+{id:1,name:'trade_2026_03_01.csv',date:'01 Mar 2026',status:'Loaded',records:1200},
+{id:2,name:'trade_2026_03_02.csv',date:'02 Mar 2026',status:'Processing',records:850},
+{id:3,name:'trade_2026_03_03.csv',date:'03 Mar 2026',status:'Failed',records:0},
+{id:4,name:'trade_2026_03_04.csv',date:'04 Mar 2026',status:'Archived',records:1450}
+];
+
+}
