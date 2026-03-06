@@ -243,3 +243,14 @@ background:#DED3C4;
 <body>
   <app-root></app-root>
 </body>
+
+
+
+import { ApplicationConfig } from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: []
+};
+
+
+
