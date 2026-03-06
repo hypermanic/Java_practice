@@ -1,47 +1,100 @@
 
+<div class="dashboard-container">
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#DED3C4;
-}
+  <div class="sidebar">
+    <h2>Trade Manager</h2>
 
-.dashboard-container{
-display:flex;
-height:100vh;
-}
+    <ul>
+      <li>Dashboard</li>
+      <li>File Search</li>
+      <li>Upload Files</li>
+      <li>Archive</li>
+      <li>Settings</li>
+    </ul>
 
-.sidebar{
-width:220px;
-background:#555879;
-color:white;
-padding:20px;
-}
+  </div>
 
-.sidebar h2{
-margin-bottom:30px;
-}
+  <div class="main-content">
 
-.sidebar ul{
-list-style:none;
-padding:0;
-}
+    <div class="navbar">
+      Trade File Processing Dashboard
+    </div>
 
-.sidebar li{
-padding:10px 0;
-cursor:pointer;
-}
+    <div class="cards">
 
-.sidebar li:hover{
-color:#F4EBD3;
-}
+      <div class="card">
+        <h3>Files Loaded</h3>
+        <p>24</p>
+      </div>
 
-.main-content{
-flex:1;
-padding:20px;
-}
+      <div class="card">
+        <h3>Processing</h3>
+        <p>3</p>
+      </div>
 
-.navbar{
+      <div class="card">
+        <h3>Failed</h3>
+        <p>2</p>
+      </div>
+
+      <div class="card">
+        <h3>Archived</h3>
+        <p>18</p>
+      </div>
+
+    </div>
+
+    <div class="table-container">
+
+      <h3>Recent File Loads</h3>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Filename</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Records</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let file of files">
+
+            <td>{{file.id}}</td>
+            <td>{{file.name}}</td>
+            <td>{{file.date}}</td>
+
+            <td
+            [ngClass]="{
+            'status-loaded':file.status==='Loaded',
+            'status-processing':file.status==='Processing',
+            'status-failed':file.status==='Failed',
+            'status-archived':file.status==='Archived'
+            }">
+            {{file.status}}
+            </td>
+
+            <td>{{file.records}}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
 background:#555879;
 color:white;
 padding:15px;
